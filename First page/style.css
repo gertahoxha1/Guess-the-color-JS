@@ -1,0 +1,21 @@
+*{
+    background-color: #FFFBEF;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    overflow: hidden;
+}
+
+button   {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20%;
+    height: 20%;
+    transform: translate(-50%, -50%) ;
+    background-color: black;
+    color: white;
+    font-size: 40px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
