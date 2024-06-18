@@ -5,7 +5,7 @@
     overflow: hidden;
 }
 
-button   {
+.button{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -13,9 +13,18 @@ button   {
     height: 20%;
     transform: translate(-50%, -50%) ;
     background-color: black;
-    color: white;
-    font-size: 40px;
     border-radius: 100px;
     cursor: pointer;
 }
 
+a{
+    text-decoration: none;
+    font-size: 40px;
+    color: white;
+    background: none;
+
+}
+
+.animate__animated.animate__bounceIn {
+    --animate-duration: 2s;
+  }
