@@ -15,6 +15,8 @@
     background-color: black;
     border-radius: 100px;
     cursor: pointer;
+    padding: 0;
+    border: 0;
 }
 
 a{
@@ -28,3 +30,5 @@ a{
 .animate__animated.animate__bounceIn {
     --animate-duration: 2s;
   }
+
+  
