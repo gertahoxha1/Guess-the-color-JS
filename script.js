@@ -1,56 +1,53 @@
-let numbSquares=6;
+let numbSquares = 6;
 let colors = [];
 let pickedColor;
 
 let squares = document.querySelectorAll(".square");
 let cDisplay = document.querySelector("#color-display");
-let p = document.querySelector("#head");
 let messageDisplay = document.querySelector("#message");
 let resetButton = document.querySelector("#reset");
 
 startGame();
 
 function startGame() {
-	putUpSquares();
 	reset();
     cDisplay.textContent = pickedColor;
+    setUpSquares();
 }
 
 resetButton.addEventListener("click", function() {
 	reset();
 });
 
-function putUpSquares() {
+function setUpSquares() {
 	for (let i = 0; i < squares.length; i++) {
-		squares[i].style.backgroundColor = colors[i];
 		squares[i].addEventListener("click", function() {
-			let clickedColor = this.style.backgroundColor;
+			let clickedColor = rgbToHex(this.style.backgroundColor);
 			if(clickedColor === pickedColor) {
 				messageDisplay.textContent = "Correct";
+				messageDisplay.style.color = "green";
 				resetButton.textContent = "Play Again";
 				changeColors(pickedColor);
-			}
-			else {
+			} else {
 				this.style.backgroundColor = "#F7418F";
-				messageDisplay.textContent = "try again";
+				messageDisplay.textContent = "Try Again";
+				messageDisplay.style.color = "red";
 			}
 		});
 	}
 }
 
 function reset() {
-	colors = generateColor(numbSquares);
+	colors = generateColors(numbSquares);
 	pickedColor = chooseColor();
-	p.style.backgroundColor = "#FFFF";
 	cDisplay.textContent = pickedColor;
-	resetButton.textContent = "New Colors";
+	resetButton.textContent = "New Color";
 	messageDisplay.textContent = "";
 	for (let i = 0; i < squares.length; i++) {
 		if(colors[i]) { 
 			squares[i].style.display = "block";
 			squares[i].style.backgroundColor = colors[i];
-		}
-		else {
+		} else {
 			squares[i].style.display = "none";
 		}
 	}
@@ -59,9 +56,8 @@ function reset() {
 function changeColors(color) {
 	for(let i = 0; i < squares.length; i++) {
 		squares[i].style.backgroundColor = color;
-		container.style.backgroundColor = color;
-		p.style.backgroundColor = color;
 	}
+	p.style.backgroundColor = color;
 }
 
 function chooseColor() {
@@ -69,7 +65,7 @@ function chooseColor() {
 	return colors[random];
 }
 
-function generateColor(num) {
+function generateColors(num) {
 	let array = [];
 	for (let i = 0; i < num; i++) {
 		array.push(makeHexColor());
@@ -81,5 +77,14 @@ function makeHexColor() {
     let h = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
     let e = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
     let x = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
-    return "#" + h + e + x;
+    return `#${h}${e}${x}`;
+}
+
+function rgbToHex(rgb) {
+    let rgbArray = rgb.match(/\d+/g);
+    let hex = "#";
+    for (let i = 0; i < 3; i++) {
+        hex += parseInt(rgbArray[i]).toString(16).padStart(2, '0');
+    }
+    return hex;
 }
